@@ -9,3 +9,37 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       Int    @id @default(autoincrement())
+  login    String @unique @db.VarChar(255)
+  password String @db.VarChar(255)
+}
+
+model Utente {
+  id       String     @id @default(uuid())
+  nome     String     @db.VarChar(255)
+  idade    String     @db.VarChar(255)
+  genero   String     @db.VarChar(255)
+  morada   String?    @db.VarChar(255)
+  contato  String     @db.VarChar(255)
+  Consulta Consulta[]
+}
+
+model Medico {
+  id            String @id @default(uuid())
+  nome          String @db.VarChar(255)
+  especialidade String @db.VarChar(255)
+}
+
+model Consulta {
+  id            String   @id @default(uuid())
+  data          DateTime @default(now())
+  hora          DateTime @default(now())
+  sala          String   @db.VarChar(255)
+  medico        String   @db.VarChar(255)
+  especialidade String   @db.VarChar(255)
+  observacoes   String?  @db.VarChar(255)
+  utenteId      String
+  utente        Utente   @relation(fields: [utenteId], references: [id])
+}
