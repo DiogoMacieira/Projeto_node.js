@@ -11,35 +11,59 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  login    String @unique @db.VarChar(255)
-  password String @db.VarChar(255)
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  login     String   @unique @db.VarChar(255)
+  password  String   @db.VarChar(255)
+
+  Profile Profile?
 }
 
 model Utente {
-  id       String     @id @default(uuid())
-  nome     String     @db.VarChar(255)
-  idade    String     @db.VarChar(255)
-  genero   String     @db.VarChar(255)
-  morada   String?    @db.VarChar(255)
-  contato  String     @db.VarChar(255)
-  Consulta Consulta[]
+  id        String     @id @default(uuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  nome      String     @db.VarChar(255)
+  idade     String     @db.VarChar(255)
+  genero    String     @db.VarChar(255)
+  morada    String?    @db.VarChar(255)
+  contato   String     @db.VarChar(255)
+  deleted   Boolean    @default(false)
+  Consulta  Consulta[]
 }
 
 model Medico {
-  id            String @id @default(uuid())
-  nome          String @db.VarChar(255)
-  especialidade String @db.VarChar(255)
+  id            String   @id @default(uuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  deleted   Boolean    @default(false)
+  nome          String   @db.VarChar(255)
+  especialidade String   @db.VarChar(255)
 }
 
 model Consulta {
   id            String   @id @default(uuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
   data          DateTime @default(now())
   hora          DateTime @default(now())
-  sala          String   @db.VarChar(255)
   medico        String   @db.VarChar(255)
   especialidade String   @db.VarChar(255)
   observacoes   String?  @db.VarChar(255)
+  sala          String   @db.VarChar(255)
+  deleted       Boolean  @default(false)
   utenteId      String
   utente        Utente   @relation(fields: [utenteId], references: [id])
+}
+
+model Profile {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  firstName String   @db.VarChar(255)
+  lastName  String?  @db.VarChar(255)
+  bio       String?  @db.Text()
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

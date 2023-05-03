@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { add } from "../../services/products";
+import { add } from "../../services/consultas";
 
 export default async (request: Request, response: Response) => {
-  const { name, price, description } = request.body;
+  const { data,hora,medico,especialidade,sala } = request.body;
 
-  const newProduct = await add(name, price, description);
+  const newConsulta = await add(data,hora,medico,especialidade,sala);
 
-  return response.json(newProduct);
+  return response.json(newConsulta);
 };

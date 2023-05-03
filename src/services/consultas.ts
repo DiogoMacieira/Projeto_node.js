@@ -1,35 +1,51 @@
-import { PrismaClient, Product } from "@prisma/client";
+import { PrismaClient, Consulta } from "@prisma/client";
 
 export const prisma = new PrismaClient();
 
 const all = () =>
-  prisma.product.findMany({
+  prisma.consulta.findMany({
     where: {
       deleted: false,
     },
   });
 
 const add = (
-  data: number,
-  hora: number,
-  sala: number,
+  data: string,
+  hora:string,
   medico: string,
-  observasoes?: string
+  especialidade:string,
+  sala: string,
 ) =>
-  prisma.product.create({
+  prisma.consulta.create({
     data: {
-      name,
-      price,
-      description,
+      data,
+      hora,
+      medico,
+      especialidade,
+      sala,
     },
   });
 
 const remove = (id: string) =>
-  prisma.product.update({
+  prisma.consulta.update({
     where: { id },
     data: {
       deleted: true,
     },
   });
 
-export { all, add, remove };
+  const update = (id: string, consulta: Consulta) =>
+  prisma.consulta.update({
+    where: { id },
+    data: consulta,
+  });
+
+  const detail = (id: string) =>
+  prisma.consulta.findFirst({
+    where: {
+      id,
+      deleted: false,
+    },
+  });
+
+export { all, add, remove,update ,detail};
