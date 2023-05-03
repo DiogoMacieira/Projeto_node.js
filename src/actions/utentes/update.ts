@@ -7,11 +7,11 @@ export default async (request: Request, response: Response) => {
   if (!(await detail(String(id)))) {
     return response.status(404).json({
       code: 404,
-      message: "Consulta not found",
+      message: "Utente not found",
     });
   }
 
-  const consulta = await update(String(id), request.body);
+  const utente = await update(String(id), request.body);
 
-  return response.json(consulta);
+  return response.json(utente);
 };

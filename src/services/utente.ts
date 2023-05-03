@@ -11,7 +11,7 @@ const all = () =>
 
 const add = (
   nome: string,
-  idade: number,
+  idade: string,
   genero:string,
   morada:string,
   contato: string,
