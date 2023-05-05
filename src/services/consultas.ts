@@ -14,6 +14,7 @@ const add = (
   hora:string,
   medico: string,
   especialidade:string,
+  utente:string,
   sala: string,
 ) =>
   prisma.consulta.create({
@@ -22,6 +23,7 @@ const add = (
       hora,
       medico,
       especialidade,
+      utente,
       sala,
     },
   });
