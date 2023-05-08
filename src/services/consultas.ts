@@ -13,8 +13,8 @@ const add = async (
   data: Date | string,
   hora: Date | string,
   medicoId: string,
-  especialidade: string,
   utenteId: string,
+  especialidade: string,
   sala: string,
   observacoes?: string
 ) => {

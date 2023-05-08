@@ -51,12 +51,12 @@ model Consulta {
   hora          DateTime @default(now())
   medicoId      String
   medico        Medico   @relation(fields: [medicoId], references: [id])
-  especialidade String   @db.VarChar(255)
-  observacoes   String?  @db.VarChar(255)
-  sala          String   @db.VarChar(255)
-  deleted       Boolean  @default(false)
   utenteId      String
   utente        Utente   @relation(fields: [utenteId], references: [id])
+  especialidade String   @db.VarChar(255)
+  sala          String   @db.VarChar(255)
+  observacoes   String?  @db.VarChar(255)
+  deleted       Boolean  @default(false)
 }
 
 model Profile {
