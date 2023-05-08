@@ -34,12 +34,13 @@ model Utente {
 }
 
 model Medico {
-  id            String   @id @default(uuid())
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  deleted       Boolean  @default(false)
-  nome          String   @db.VarChar(255)
-  especialidade String   @db.VarChar(255)
+  id            String     @id @default(uuid())
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  deleted       Boolean    @default(false)
+  nome          String     @db.VarChar(255)
+  especialidade String     @db.VarChar(255)
+  Consulta      Consulta[]
 }
 
 model Consulta {
@@ -48,7 +49,8 @@ model Consulta {
   updatedAt     DateTime @updatedAt
   data          DateTime @default(now())
   hora          DateTime @default(now())
-  medico        String   @db.VarChar(255)
+  medicoId      String
+  medico        Medico   @relation(fields: [medicoId], references: [id])
   especialidade String   @db.VarChar(255)
   observacoes   String?  @db.VarChar(255)
   sala          String   @db.VarChar(255)

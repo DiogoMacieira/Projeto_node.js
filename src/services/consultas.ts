@@ -1,5 +1,5 @@
 import { PrismaClient, Consulta } from "@prisma/client";
-
+import dayjs from "dayjs";
 export const prisma = new PrismaClient();
 
 const all = () =>
@@ -9,24 +9,29 @@ const all = () =>
     },
   });
 
-const add = (
+const add = async (
   data: Date | string,
-  hora:  Date | string,
-  medico: string,
-  especialidade:string,
-  utente:string,
+  hora: Date | string,
+  medicoId: string,
+  especialidade: string,
+  utenteId: string,
   sala: string,
-) =>
-  prisma.consulta.create({
+  observacoes?: string
+) => {
+  const consulta = await prisma.consulta.create({
     data: {
-      data: new Date(data), 
-      hora: new Date(hora),
-      medico,
+      data: dayjs(data).format("YYYY-MM-DD"),
+      hora: dayjs(hora).format("HH:mm"),
+      medicoId,
       especialidade,
-      utente,
+      utenteId,
       sala,
+      observacoes,
     },
   });
+
+  return consulta;
+};
 
 const remove = (id: string) =>
   prisma.consulta.update({
@@ -36,13 +41,13 @@ const remove = (id: string) =>
     },
   });
 
-  const update = (id: string, consulta: Consulta) =>
+const update = (id: string, consulta: Consulta) =>
   prisma.consulta.update({
     where: { id },
     data: consulta,
   });
 
-  const detail = (id: string) =>
+const detail = (id: string) =>
   prisma.consulta.findFirst({
     where: {
       id,
@@ -50,4 +55,4 @@ const remove = (id: string) =>
     },
   });
 
-export { all, add, remove,update ,detail};
+export { all, add, remove, update, detail };

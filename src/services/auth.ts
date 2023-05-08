@@ -6,6 +6,9 @@ const prisma = new PrismaClient();
 export async function register(
   email: string,
   password: string,
+  firstName: string,
+  lastName?: string,
+  bio?: string
 ) {
   const user = await prisma.user.create({
     data: {
@@ -13,8 +16,9 @@ export async function register(
       password: await bcrypt.hash(password, 8),
       profile: {
         create: {
-          email,
-          password,
+          firstName,
+          lastName,
+          bio,
         },
       },
     },

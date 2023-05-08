@@ -8,7 +8,7 @@ export default async (request: Request, response: Response) => {
         return response.json({ token });
     } catch(e:any){
             response.status(401).json({
-      code: 400,
+      code: 401,
       error: "Unauthoriezed",
       message: e.message,
     });
