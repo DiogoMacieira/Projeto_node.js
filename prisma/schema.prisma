@@ -29,6 +29,7 @@ model Utente {
   genero    String     @db.VarChar(255)
   morada    String?    @db.VarChar(255)
   contato   String     @unique @db.VarChar(255)
+  numeroUtente String  @unique @db.VarChar(255)
   deleted   Boolean    @default(false)
   Consulta  Consulta[]
 }
@@ -40,6 +41,7 @@ model Medico {
   deleted       Boolean    @default(false)
   nome          String     @db.VarChar(255)
   especialidade String     @db.VarChar(255)
+  numeroMedico String  @unique @db.VarChar(255)
   Consulta      Consulta[]
 }
 

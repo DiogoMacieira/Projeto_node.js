@@ -12,8 +12,8 @@ const all = () =>
 const add = async (
   data: Date | string,
   hora: Date | string,
-  medicoId: string,
-  utenteId: string,
+  numeroMedico: string,
+  numeroUtente: string,
   especialidade: string,
   sala: string,
   observacoes?: string
@@ -22,9 +22,9 @@ const add = async (
     data: {
       data: dayjs(data).format("YYYY-MM-DD"),
       hora: dayjs(hora).format("HH:mm"),
-      medicoId,
+      numeroMedico,
+      numeroUtente,
       especialidade,
-      utenteId,
       sala,
       observacoes,
     },
