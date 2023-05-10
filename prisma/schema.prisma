@@ -60,7 +60,7 @@ model Consulta {
 }
 
 model Profile {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   firstName String   @db.VarChar(255)
