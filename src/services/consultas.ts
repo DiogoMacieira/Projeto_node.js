@@ -10,20 +10,18 @@ const all = () =>
   });
 
 const add = async (
-  data: Date | string,
-  hora: Date | string,
-  numeroMedico: string,
-  numeroUtente: string,
+  datahora: Date,
+  nomeMedico: string,
+  nomeUtente: string,
   especialidade: string,
-  sala: string,
-  observacoes?: string
+  observacoes: string,
+  sala: string
 ) => {
   const consulta = await prisma.consulta.create({
     data: {
-      data: dayjs(data).format("YYYY-MM-DD"),
-      hora: dayjs(hora).format("HH:mm"),
-      numeroMedico,
-      numeroUtente,
+      datahora: dayjs(datahora).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+      NomeMedico: nomeMedico,
+      NomeUtente: nomeUtente,
       especialidade,
       sala,
       observacoes,
