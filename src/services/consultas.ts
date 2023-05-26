@@ -60,8 +60,6 @@ const update = (
     },
   });
 
-export { all, add, remove, update, detail };
-
 const detail = (id: string) =>
   prisma.consulta.findFirst({
     where: {
