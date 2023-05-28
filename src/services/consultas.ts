@@ -39,26 +39,25 @@ const remove = (id: string) =>
     },
   });
 
-const update = (
-  id: string,
-  datahora: Date,
-  nomeMedico: string,
-  nomeUtente: string,
-  especialidade: string,
-  observacoes: string,
-  sala: string
-) =>
+const update = (id: string, consulta: Consulta) =>
   prisma.consulta.update({
     where: { id },
-    data: {
-      datahora: dayjs(datahora).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
-      NomeMedico: nomeMedico,
-      NomeUtente: nomeUtente,
-      especialidade,
-      observacoes,
-      sala,
+    data: consulta,
+    include: {
+      utente: {
+        select: {
+          name: true,
+        },
+      },
+      medico: {
+        select: {
+          name: true,
+          especialidade: true,
+        },
+      },
     },
   });
+
 
 const detail = (id: string) =>
   prisma.consulta.findFirst({
